@@ -16,10 +16,12 @@ fn main() {
     take_ownership(s2);
     // println!("{}", s2); //Cant do this since object was moved to the function and not returned
 
-    s = take_n_return_ownership(s);
-    println!("{}", s);
+    let s3 = take_n_return_ownership(s);
+    println!("{}", s3);
     s = give_ownership();
-    println!("{}", s);
+    let mut s4 = String::from("asd");
+    let mut s5 = String::from("df");
+    let (s6, s7) = ownership_move_with_tuple(s4,s5);
 
 }
 
@@ -36,4 +38,9 @@ fn take_n_return_ownership(some_string: String) -> String{
 fn give_ownership() -> String{
     let some_string = String::from("Otra cosa");
     some_string
+}
+
+fn ownership_move_with_tuple(m_string : String, m_string_2: String) -> (String, String){
+    //yadda yadda
+    (m_string, m_string_2)
 }
