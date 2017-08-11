@@ -19,10 +19,13 @@ fn main() {
     let s3 = take_n_return_ownership(s);
     println!("{}", s3);
     s = give_ownership();
-    let mut s4 = String::from("asd");
-    let mut s5 = String::from("df");
-    let (s6, s7) = ownership_move_with_tuple(s4,s5);
+    let  s4 = String::from("asd");
+    let  s5 = String::from("df");
+    let (s6,  mut s7) = ownership_move_with_tuple(s4,s5);
 
+    get_len_reference(&s6);
+    modify_str_ref(&mut s7);
+    get_first_word(&s7);
 }
 
 fn take_ownership(some_string : String){
@@ -43,4 +46,26 @@ fn give_ownership() -> String{
 fn ownership_move_with_tuple(m_string : String, m_string_2: String) -> (String, String){
     //yadda yadda
     (m_string, m_string_2)
+}
+
+//To use something without borrowing ownership, use references
+//Borrowed things can not be modified
+fn get_len_reference(s : &String) -> usize{
+    s.len()
+    //s.push_str("fuah!");
+}
+
+fn modify_str_ref(s: &mut String) -> usize{
+    s.push_str(" fuah!"); 
+    s.len()
+}
+
+fn get_first_word(s: &String) -> &str{
+    let bytes = s.as_bytes(); 
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' '{
+            return &s[0..i]
+        }
+    }
+    &s
 }
