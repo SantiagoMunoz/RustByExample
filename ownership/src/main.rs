@@ -60,12 +60,12 @@ fn modify_str_ref(s: &mut String) -> usize{
     s.len()
 }
 
-fn get_first_word(s: &String) -> &str{
+fn get_first_word(s: &str) -> &str{
     let bytes = s.as_bytes(); 
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' '{
             return &s[0..i]
         }
     }
-    &s
+    &s[..]
 }
