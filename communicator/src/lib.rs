@@ -7,5 +7,6 @@ pub mod network;
 mod tests {
     #[test]
     fn it_works() {
+        super::client::connect();
     }
 }
